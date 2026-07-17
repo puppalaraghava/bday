@@ -1,0 +1,95 @@
+<style>
+    div {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f4f4f4;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+
+    button {
+        padding: 15px 35px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 10;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 12px;
+        height: 18px;
+        top: -20px;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<div>
+
+<button id="celebrate">🎉 Celebrate</button>
+
+<script>
+const colors = [
+    "#ff3b30",
+    "#34c759",
+    "#007aff",
+    "#ffcc00",
+    "#af52de",
+    "#ff9500",
+    "#00c7be"
+];
+
+function createConfetti() {
+    for (let i = 0; i < 180; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.width = Math.random() * 10 + 6 + "px";
+        confetti.style.height = Math.random() * 15 + 8 + "px";
+
+        confetti.style.animationDuration =
+            Math.random() * 3 + 2 + "s";
+
+        confetti.style.animationDelay =
+            Math.random() * 0.5 + "s";
+
+        confetti.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5500);
+    }
+}
+
+document.getElementById("celebrate").addEventListener("click", createConfetti);
+</script>
+
+</div>
