@@ -121,14 +121,14 @@ button{
 }
 
 #noBtn{
-    position:absolute;
-    left:40px;
-    top:65px;
-    background:white;
-    color:#c2185b;
-    padding:15px 38px;
-    border-radius:40px;
-    border:2px solid #ffc1d8;
+    position: absolute;
+    left: 128px;
+    top: 0px;
+    color: #c2185b;
+      padding: 15px 45px;
+    border-radius: 40px;
+    box-shadow: 0 10px 20px rgba(216, 27, 96, .3);
+
 }
 
 .action{
@@ -163,6 +163,29 @@ button{
 .action button:hover{
     transform:scale(1.05);
 }
+
+
+    .confetti {
+        position: absolute;
+        width: 12px;
+        height: 18px;
+        top: -20px;
+        animation: fall linear forwards;
+    }
+    .d-none {
+        display: none;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
 </style>
 
 </head>
@@ -182,13 +205,13 @@ for(let i=0;i<20;i++){
 }
 </script>
 
-<div class="card">
+<div class="card1 d-none" id="card1">
 
     <h1>Happy Birthday</h1>
-    <h2>Jhanavi</h2>
+    <h2>My Love</h2>
 
     <div class="cake">
-        🐻🎂🐼
+        <img src="img1.png" style="width: 3em;" />
     </div>
 
     <div class="question">
@@ -212,7 +235,10 @@ for(let i=0;i<20;i++){
     </div>
 
 </div>
+<div class="d-none card2" id="card2">
+    <div></div>
 
+</div>
 <script>
 
 const noBtn=document.getElementById("noBtn");
@@ -231,14 +257,56 @@ noBtn.addEventListener("mouseover",()=>{
 
 });
 
+const colors = [
+    "#ff3b30",
+    "#34c759",
+    "#007aff",
+    "#ffcc00",
+    "#af52de",
+    "#ff9500",
+    "#00c7be"
+];
+
+function createConfetti() {
+    for (let i = 0; i < 180; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.width = Math.random() * 10 + 6 + "px";
+        confetti.style.height = Math.random() * 15 + 8 + "px";
+
+        confetti.style.animationDuration =
+            Math.random() * 3 + 2 + "s";
+
+        confetti.style.animationDelay =
+            Math.random() * 0.5 + "s";
+
+        confetti.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5500);
+    }
+}
+
+createConfetti();
+setTimeout(()=>{
+     const el = document.querySelector('#card1');
+  el.classList.remove("d-none");
+},5000);
+
 document.getElementById("yesBtn").addEventListener("click",()=>{
-
     document.getElementById("actionDiv").style.display="block";
-
     document.querySelector(".question").innerHTML="❤️ I knew you'd say YES! ❤️";
-
     document.getElementById("noBtn").style.display="none";
-
+    createConfetti();
 });
 
 </script>
