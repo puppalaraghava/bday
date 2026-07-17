@@ -527,6 +527,10 @@
       }
     </script>
 
+    <audio id="bgMusic" loop>
+      <source src="audi.mpeg" type="audio/mp3" />
+    </audio>
+
     <div class="card1 d-none" id="card1">
       <h1>Happy Birthday</h1>
       <h2>My Love</h2>
@@ -591,34 +595,6 @@
               <span class="pen">✒️</span>
             </div>
           </div>
-
-          <script>
-            const message =
-              "Dear Srija,  Happy Birthday to someone truly special! You are Sweet Soul, Super Loyal, My Rock, and I'm so grateful to have you in my life. You bring so much warmth and sweetness into my life. Every moment with you is precious. you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful mome Here's to celebrating you today and always!O With love and best wishes, Your Special Someone";
-
-            let index = 0;
-
-            const area1 = document.getElementById("text");
-
-            function write() {
-              if (index < message.length) {
-                let span = document.createElement("span");
-
-                span.className = "char";
-
-                span.innerHTML =
-                  message[index] === " " ? "&nbsp;" : message[index];
-
-                area1.appendChild(span);
-
-                index++;
-
-                setTimeout(write, 110);
-              }
-            }
-
-            write();
-          </script>
         </div>
       </div>
     </div>
@@ -674,6 +650,7 @@
       }
 
       createConfetti();
+
       setTimeout(() => {
         const el = document.querySelector("#card1");
         el.classList.remove("d-none");
@@ -700,6 +677,30 @@
       // card2 starts
 
       let count = 0;
+      //   card3
+
+      const message =
+        "Dear Srija,  Happy Birthday to someone truly special! You are Sweet Soul, Super Loyal, My Rock, and I'm so grateful to have you in my life. You bring so much warmth and sweetness into my life. Every moment with you is precious. you all the happiness, love, and joy that you deserve. May this year bring you countless beautiful mome Here's to celebrating you today and always!O With love and best wishes, Your Special Someone";
+
+      let index = 0;
+
+      const area1 = document.getElementById("text");
+
+      function write() {
+        if (index < message.length) {
+          let span = document.createElement("span");
+
+          span.className = "char";
+
+          span.innerHTML = message[index] === " " ? "&nbsp;" : message[index];
+
+          area1.appendChild(span);
+
+          index++;
+
+          setTimeout(write, 110);
+        }
+      }
 
       document.querySelectorAll(".balloon").forEach((balloon) => {
         balloon.onclick = function () {
@@ -725,6 +726,8 @@
                 el3.classList.add("d-none");
                 const el4 = document.querySelector("#card3");
                 el4.classList.remove("d-none");
+
+                write();
               }, 6000);
             }
           }, 500);
@@ -750,6 +753,34 @@
           }, 4000);
         }, 200);
       }
+      document.body.addEventListener(
+        "click",
+        function () {
+          const music = document.getElementById("bgMusic");
+
+          music.play();
+        },
+        { once: true },
+      );
+      window.addEventListener("load", () => {
+        music.volume = 0;
+
+        music.play().catch(() => {
+          // Browser blocked autoplay
+          console.log("Click anywhere to start music");
+        });
+
+        let volume = 0;
+
+        let fadeIn = setInterval(() => {
+          if (volume < 0.6) {
+            volume += 0.05;
+            music.volume = volume;
+          } else {
+            clearInterval(fadeIn);
+          }
+        }, 300);
+      });
     </script>
   </body>
 </html>
