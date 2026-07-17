@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Dear</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffd6e5;
+    overflow:hidden;
+    font-family:Poppins,sans-serif;
+}
+
+/* Floating Hearts */
+
+.heart{
+    position:absolute;
+    color:#ff7aa5;
+    animation:float 10s linear infinite;
+    opacity:.4;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120px);
+    }
+}
+
+.card{
+    width:380px;
+    background:#f8cddb;
+    border-radius:30px;
+    padding:35px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+    animation:pop .8s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.7);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+h1{
+    font-family:Pacifico;
+    color:#9b1849;
+    font-size:40px;
+}
+
+h2{
+    font-family:Pacifico;
+    color:#9b1849;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.cake{
+    font-size:85px;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+.question{
+    margin:25px 0;
+    color:#7a1a42;
+    font-size:20px;
+    font-weight:600;
+}
+
+.btn-area{
+    position:relative;
+    height:120px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    transition:.3s;
+    font-size:18px;
+    font-weight:600;
+}
+
+#yesBtn{
+    background:#d81b60;
+    color:white;
+    padding:15px 45px;
+    border-radius:40px;
+    box-shadow:0 10px 20px rgba(216,27,96,.3);
+}
+
+#yesBtn:hover{
+    transform:scale(1.08);
+}
+
+#noBtn{
+    position:absolute;
+    left:40px;
+    top:65px;
+    background:white;
+    color:#c2185b;
+    padding:15px 38px;
+    border-radius:40px;
+    border:2px solid #ffc1d8;
+}
+
+.action{
+    display:none;
+    animation:fade .8s;
+    margin-top:20px;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.action h3{
+    color:#c2185b;
+    margin-bottom:15px;
+}
+
+.action button{
+    background:#ff4f8a;
+    color:white;
+    padding:12px 28px;
+    border-radius:30px;
+}
+
+.action button:hover{
+    transform:scale(1.05);
+}
+</style>
+
+</head>
+<body>
+
+<!-- Hearts -->
+<script>
+for(let i=0;i<20;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
+    heart.style.animationDuration=(5+Math.random()*6)+"s";
+    heart.style.animationDelay=Math.random()*5+"s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="card">
+
+    <h1>Happy Birthday</h1>
+    <h2>Jhanavi</h2>
+
+    <div class="cake">
+        🐻🎂🐼
+    </div>
+
+    <div class="question">
+        Are you excited for what's next?
+    </div>
+
+    <div class="btn-area">
+
+        <button id="yesBtn">Yes</button>
+
+        <button id="noBtn">No</button>
+
+    </div>
+
+    <div class="action" id="actionDiv">
+        <h3>🎉 Yay!! Let's begin the surprise!</h3>
+
+        <button onclick="alert('Next Surprise Coming Soon ❤️')">
+            Continue →
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+const noBtn=document.getElementById("noBtn");
+const area=document.querySelector(".btn-area");
+
+noBtn.addEventListener("mouseover",()=>{
+
+    const maxX=area.clientWidth-noBtn.offsetWidth;
+    const maxY=area.clientHeight-noBtn.offsetHeight;
+
+    const randomX=Math.random()*maxX;
+    const randomY=Math.random()*maxY;
+
+    noBtn.style.left=randomX+"px";
+    noBtn.style.top=randomY+"px";
+
+});
+
+document.getElementById("yesBtn").addEventListener("click",()=>{
+
+    document.getElementById("actionDiv").style.display="block";
+
+    document.querySelector(".question").innerHTML="❤️ I knew you'd say YES! ❤️";
+
+    document.getElementById("noBtn").style.display="none";
+
+});
+
+</script>
+
+</body>
+</html>
